@@ -1,18 +1,29 @@
-import { Request, Response, NextFunction } from 'express';
-import { IRepository } from '../repositories';
-import { User } from '../data';
+import { Request, Response } from 'express';
+import { UserRepository } from '../repositories/users.repository';
 
 export class UsersController {
-  private readonly _repository: IRepository<User>;
+  private readonly _repository: UserRepository;
 
-  constructor(repository: IRepository<User>) {
-    this._repository = repository;
+  constructor(private repository: UserRepository) {
+    this._repository = this.repository;
   }
 
-  public async getAllUsers(request: Request, response: Response, next: NextFunction): Promise<any> {
+  async register(request: Request, response: Response) {
+    
     return this._repository
-      .findAll()
+      .register(request.body)
+      .then((users) => response.status(200).send(users))
+      .catch((error) => response.status(500).send({ error: error }));
+  }
+
+  async login(request: Request, response: Response) {
+    
+    return this._repository
+      .login(request.body)
       .then((users) => response.status(200).send(users))
       .catch((error) => response.status(500).send({ error: error }));
   }
 }
+
+
+

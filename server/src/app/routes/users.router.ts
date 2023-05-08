@@ -1,14 +1,19 @@
-import express, { Request, Response, Router, NextFunction } from 'express';
+import express, { Request, Response, Router } from 'express';
 import { UsersController } from '../controllers';
-import { IRepository, UsersRepository } from '../repositories';
-import { User } from '../data';
+import { UserRepository } from '../repositories/users.repository';
+import { IUserRepository } from '../models/IUser.repository';
 
 const router: Router = express.Router();
-const usersRepository: IRepository<User> = new UsersRepository();
+const usersRepository: IUserRepository = new UserRepository();
+
 const controller: UsersController = new UsersController(usersRepository);
 
-router.get('/', async (request: Request, response: Response, next: NextFunction) => {
-  await controller.getAllUsers(request, response, next);
+router.post('/register', async (request: Request, response: Response) => {
+  await controller.register(request, response);
+});
+
+router.post('/login', async (request: Request, response: Response) => {
+  await controller.login(request, response);
 });
 
 export const usersRouter: Router = router;

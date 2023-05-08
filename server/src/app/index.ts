@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import redisClient from './util/connectRedis';
 import cors from 'cors';
 import morgan from 'morgan';
-
+import { applicationRouter } from './routes/application.router';
 
 export class Application {
 	private readonly _server: Express;
@@ -17,6 +17,7 @@ export class Application {
 		this._server.use(express.urlencoded({ extended: true }));
 		this._server.use(cors());
 		this._server.use(morgan('dev'));
+		this._server.use("/api",applicationRouter);
 	}
 
 	public bootstrap = async (): Promise<void> => {
