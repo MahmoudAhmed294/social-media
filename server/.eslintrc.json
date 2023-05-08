@@ -1,0 +1,27 @@
+{
+	"env": {
+		"es2021": true,
+		"node": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 2022,
+		"sourceType": "module"
+	},
+	"plugins": ["@typescript-eslint"],
+	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+	"rules": {
+		"no-useless-constructor":"warn",
+		"class-methods-use-this": "off",
+		"@typescript-eslint/explicit-function-return-type": "warn",
+		"@typescript-eslint/no-unused-vars": "error",
+		"@typescript-eslint/no-explicit-any": "error",
+		"@typescript-eslint/no-empty-function": "error",
+		"@typescript-eslint/ban-ts-comment": "error",
+		"@typescript-eslint/no-non-null-assertion": "error",
+		"@typescript-eslint/no-var-requires": "error",
+		"@typescript-eslint/no-use-before-define": "error",
+		"@typescript-eslint/no-inferrable-types": "warn",
+		"@typescript-eslint/prefer-optional-chain": "error"
+	}
+}
